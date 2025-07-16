@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Nota Final del Alumno</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+    <h1 class="text-center mb-4">Cálculo de Nota Final</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6 bg-white p-4 rounded shadow-sm">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre del Alumno</label>
+          <input type="text" id="nombre" class="form-control" placeholder="Ej: Juan Pérez">
+        </div>
+
+        <div class="mb-3">
+          <label for="carnet" class="form-label">Carnet</label>
+          <input type="text" id="carnet" class="form-control" placeholder="Ej: A12345">
+        </div>
+
+        <div class="mb-3">
+          <label for="examen" class="form-label">Nota del Examen (20%)</label>
+          <input type="number" id="examen" class="form-control" min="0" max="10" step="0.01">
+        </div>
+
+        <div class="mb-3">
+          <label for="tareas" class="form-label">Nota de Tareas (40%)</label>
+          <input type="number" id="tareas" class="form-control" min="0" max="10" step="0.01">
+        </div>
+
+        <div class="mb-3">
+          <label for="asistencia" class="form-label">Nota de Asistencia (10%)</label>
+          <input type="number" id="asistencia" class="form-control" min="0" max="10" step="0.01">
+        </div>
+
+        <div class="mb-3">
+          <label for="investigacion" class="form-label">Nota de Investigación (30%)</label>
+          <input type="number" id="investigacion" class="form-control" min="0" max="10" step="0.01">
+        </div>
+
+        <button onclick="calcularNota()" class="btn btn-primary w-100">Calcular Nota Final</button>
+
+        <div id="resultado" class="mt-4 alert alert-info d-none"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function calcularNota() {
+      const nombre = document.getElementById("nombre").value;
+      const carnet = document.getElementById("carnet").value;
+      const examen = parseFloat(document.getElementById("examen").value);
+      const tareas = parseFloat(document.getElementById("tareas").value);
+      const asistencia = parseFloat(document.getElementById("asistencia").value);
+      const investigacion = parseFloat(document.getElementById("investigacion").value);
+
+      if (isNaN(examen) || isNaN(tareas) || isNaN(asistencia) || isNaN(investigacion) || nombre === "" || carnet === "") {
+        alert("Por favor, completa todos los campos correctamente.");
+        return;
+      }
+
+      const notaFinal = (examen * 0.20) + (tareas * 0.40) + (asistencia * 0.10) + (investigacion * 0.30);
+
+      const resultado = document.getElementById("resultado");
+      resultado.innerHTML = `
+        <strong>Nombre:</strong> ${nombre}<br>
+        <strong>Carnet:</strong> ${carnet}<br>
+        <strong>Nota Final:</strong> ${notaFinal.toFixed(2)}
+      `;
+      resultado.classList.remove("d-none");
+    }
+  </script>
+    
+</body>
+</html>

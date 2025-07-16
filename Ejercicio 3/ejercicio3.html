@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aumento Salarial por Categoría</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+    <h1 class="text-center mb-4">Calculadora de Aumento Salarial</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6 bg-white p-4 rounded shadow-sm">
+        
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre del Trabajador</label>
+          <input type="text" id="nombre" class="form-control" placeholder="Ej: Ana López">
+        </div>
+
+        <div class="mb-3">
+          <label for="salario" class="form-label">Salario Actual ($)</label>
+          <input type="number" id="salario" class="form-control" placeholder="Ej: 500.00" step="0.01">
+        </div>
+
+        <div class="mb-3">
+          <label for="categoria" class="form-label">Categoría</label>
+          <select id="categoria" class="form-select">
+            <option value="">Selecciona una categoría</option>
+            <option value="A">A - 15%</option>
+            <option value="B">B - 30%</option>
+            <option value="C">C - 10%</option>
+            <option value="D">D - 20%</option>
+          </select>
+        </div>
+
+        <button onclick="calcularAumento()" class="btn btn-success w-100">Calcular Aumento</button>
+
+        <div id="resultado" class="mt-4 alert alert-info d-none"></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <script>
+    function calcularAumento() {
+      const nombre = document.getElementById("nombre").value;
+      const salario = parseFloat(document.getElementById("salario").value);
+      const categoria = document.getElementById("categoria").value;
+
+      if (nombre === "" || isNaN(salario) || categoria === "") {
+        alert("Por favor, completa todos los campos correctamente.");
+        return;
+      }
+
+      let porcentaje = 0;
+
+      switch (categoria.toUpperCase()) {
+        case "A":
+          porcentaje = 0.15;
+          break;
+        case "B":
+          porcentaje = 0.30;
+          break;
+        case "C":
+          porcentaje = 0.10;
+          break;
+        case "D":
+          porcentaje = 0.20;
+          break;
+        default:
+          alert("Categoría inválida");
+          return;
+      }
+
+      const aumento = salario * porcentaje;
+      const nuevoSalario = salario + aumento;
+
+      const resultado = document.getElementById("resultado");
+      resultado.innerHTML = `
+        <strong>Nombre:</strong> ${nombre}<br>
+        <strong>Salario Actual:</strong> $${salario.toFixed(2)}<br>
+        <strong>Categoría:</strong> ${categoria}<br>
+        <strong>Aumento:</strong> $${aumento.toFixed(2)}<br>
+        <strong>Nuevo Salario:</strong> $${nuevoSalario.toFixed(2)}
+      `;
+      resultado.classList.remove("d-none");
+    }
+  </script>
+    
+</body>
+</html>

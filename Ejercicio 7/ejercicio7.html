@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas de Números</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+    <h2 class="text-center mb-4">Análisis de 10 Números Enteros</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8 bg-white p-4 rounded shadow-sm">
+        <form id="formularioNumeros">
+          <div class="row g-3">
+
+            <script>
+              for (let i = 1; i <= 10; i++) {
+                document.write(`
+                  <div class="col-6 col-md-4">
+                    <label for="num${i}" class="form-label">Número ${i}</label>
+                    <input type="number" class="form-control" id="num${i}" required>
+                  </div>
+                `);
+              }
+            </script>
+          </div>
+          <button type="button" onclick="analizarNumeros()" class="btn btn-primary w-100 mt-4">Analizar</button>
+        </form>
+
+        <div id="resultado" class="alert alert-info mt-4 d-none"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      function analizarNumeros() {
+       let negativos = 0;
+      let positivos = 0;
+       let multiplos15 = 0;
+      let sumaPares = 0;
+
+      for (let i = 1; i <= 10; i++) {
+        const valor = parseInt(document.getElementById(`num${i}`).value);
+
+        if (isNaN(valor)) {
+           alert(`Por favor, llena todos los campos con números válidos.`);
+          return;
+        }
+
+        if (valor < 0) negativos++;
+        else if (valor > 0) positivos++;
+
+        if (valor % 15 === 0) multiplos15++;
+
+        if (valor % 2 === 0) sumaPares += valor;
+       }
+
+      const resultado = document.getElementById("resultado");
+      resultado.innerHTML = `
+        <strong>Resultados:</strong><br>
+        ▸ Números negativos: ${negativos} <br>
+        ▸ Números positivos: ${positivos} <br>
+        ▸ Múltiplos de 15: ${multiplos15} <br>
+        ▸ Suma de los números pares: ${sumaPares}
+      `;
+      resultado.classList.remove("d-none");
+    }
+  </script>
+    
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descuentos de Viajes Turísticos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+     <div class="container mt-5">
+    <h2 class="text-center mb-4">Calculadora de Descuentos en Viajes Turísticos</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-md-6 bg-white p-4 rounded shadow-sm">
+
+        <div class="mb-3">
+          <label for="origen" class="form-label">Ciudad de Origen</label>
+          <select id="origen" class="form-select">
+            <option value="">-- Selecciona una ciudad --</option>
+            <option value="Palma">Palma</option>
+            <option value="San Salvador">San Salvador</option>
+            <option value="Santa Ana">Santa Ana</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="destino" class="form-label">Destino Turístico</label>
+          <select id="destino" class="form-select">
+            <option value="">-- Selecciona un destino --</option>
+            <option value="La costa del Sol">La costa del Sol</option>
+            <option value="Panchimalco">Panchimalco</option>
+            <option value="Puerto el Triunfo">Puerto el Triunfo</option>
+          </select>
+        </div>
+
+        <button onclick="calcularDescuento()" class="btn btn-primary w-100">Calcular Descuento</button>
+
+        <div id="resultado" class="alert alert-info mt-4 d-none"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function calcularDescuento() {
+      const origen = document.getElementById("origen").value;
+      const destino = document.getElementById("destino").value;
+      let descuento = 0;
+
+      if (origen === "Palma" && destino === "La costa del Sol") {
+        descuento = 5;
+      } else if (destino === "Panchimalco") {
+        descuento = 10;
+      } else if (destino === "Puerto el Triunfo") {
+        descuento = 15;
+      }
+
+      if (!origen || !destino) {
+        alert("Por favor, selecciona tanto el origen como el destino.");
+        return;
+      }
+
+      const resultado = document.getElementById("resultado");
+      resultado.innerHTML = `
+        <strong>Origen:</strong> ${origen}<br>
+        <strong>Destino:</strong> ${destino}<br>
+        <strong>Descuento Aplicado:</strong> ${descuento}% 
+      `;
+      resultado.classList.remove("d-none");
+    }
+  </script>
+    
+</body>
+</html>
